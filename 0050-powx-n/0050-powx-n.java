@@ -1,11 +1,13 @@
 class Solution {
     public double myPow(double x, int n) {
-        return solve(x,(long)n);
+        return solve(x,n,res);
     }
-    private double solve(double x,long n){
-        if(n==0)return 1;
-        if(n<0)return solve(1/x,-n);//-n se power positive ho gaya because x toh denominator mai jaa chuka hai
-        if(n%2==0)return solve(x*x,n/2);
-        return x*solve(x*x,(n-1)/2) ;
+    public double solve(double x,int n, double res){
+        if(n==1)return x;
+        if(n==-1)return 1/x;
+        if(n%2==0)return solve(x,n/2,Math.pow(x,n/2)*Math.pow(x,n/2));
+        return solve(x,n/2,Math.pow(x,n/2+1)*Math.pow(x,n/2));
+
     }
+
 }
