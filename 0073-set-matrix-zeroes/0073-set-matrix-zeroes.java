@@ -13,18 +13,9 @@ class Solution {
             }
 
         }
-        //set the rows to zero
-        // for(int i=0;i<m;i++){
-        //     for(int j=0;j<n;j++){
-        //         if(matrix[i][j]==0){
-        //             rows[i]=true;
-        //             cols[j]=true;
-        //         }
-        //     }
-        // }
         //set rows matrix 0
         for(int i=0;i<m;i++){
-            if(rows[i])//rows i is true means this row contains 0
+            if(rows[i])// i vertically downward travel kar raha hai aur check kar liya kya row[i] kahi true hai agar hai toh horizontallyu badho aur pura cols ko true kar do
             {
                 for(int j=0;j<n;j++){
                     matrix[i][j]=0;
@@ -33,7 +24,7 @@ class Solution {
         }
         //set the cols matrix 0
         for(int j=0;j<n;j++){
-            if(cols[j]){
+            if(cols[j]){//kya first row mai horizontally agae badhe kahi true hai agar true hai toh vertically down jao aur pura row ko zero kar do
                 for(int i=0;i<m;i++){
                     matrix[i][j]=0;
                 }
