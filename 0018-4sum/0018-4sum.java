@@ -13,13 +13,9 @@ class Solution {
                         long sum=(long)nums[i]+nums[j]+nums[k]+nums[m];
                         
                         if(sum==target){
-                            List<Integer>temp=new ArrayList<>();
-                            temp.add(nums[i]);
-                            temp.add(nums[j]);
-                            temp.add(nums[k]);
-                            temp.add(nums[m]);
                             
-                            ans.add(temp);
+                            
+                            ans.add(Arrays.asList(nums[i],nums[j],nums[k],nums[m]));
                         }
                     }
                 }
