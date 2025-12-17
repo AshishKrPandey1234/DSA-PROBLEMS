@@ -22,7 +22,8 @@ class Solution {
     public boolean isValidSudoku(char[][] board) {
         for(int i=0;i<9;i++){
             for(int j=0;j<9;j++){
-                if(board[i][j]=='.')continue;//it means pahle se row khali hai than continue;
+                if(board[i][j]=='.')continue;//it means pahle se row khali hai than continue jo khai hai usee check nahi karenge
+                ;
                 char num=board[i][j];
                 board[i][j]='.';
                 if(!isValid(board,i,j,num))return false;
