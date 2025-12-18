@@ -1,20 +1,17 @@
 class Solution {
     public boolean isValid(char board[][],int row,int col,char num){
-        //checking for row
+        //we can check row and col individually in the single loop only
+        //to check one entire row move the entire column one by one that is j traverse and for checking entire column move that particular entire row
         for(int j=0,i=0;j<9;j++,i++){
-            if(board[row][j]==num)return false;
-            if(board[i][col]==num)return false;
+            if(board[row][j]==num)return false;//row check done
+            if(board[i][col]==num)return false;//column check done
         }
-        //checking for column
-        // for(int i=0;i<9;i++){
-        //     if(board[i][col]==num)return false;
-        // }
-
-        //checking for 3*3 Grid
-        int sRow=(row/3)*3;//this will find the starting row and starting col  of subgrid trick is dividing current row by 3 than multiplying by 3
-        int sCol=(col/3)*3;
-        for(int i=sRow;i<sRow+3;i++){
-            for(int j=sCol;j<sCol+3;j++){
+        //checking for the grid
+        int SRow=(row/3)*3;
+        int SCol=(col/3)*3;
+        //this two formula will help you in the reaching to the first index of each subgris than traverse each subgrid and compare 
+        for(int i=SRow;i<SRow+3;i++){
+            for(int j=SCol;j<SCol+3;j++){
                 if(board[i][j]==num)return false;
             }
         }
@@ -23,12 +20,19 @@ class Solution {
     public boolean isValidSudoku(char[][] board) {
         for(int i=0;i<9;i++){
             for(int j=0;j<9;j++){
-                if(board[i][j]=='.')continue;//it means pahle se row khali hai than continue jo khai hai usee check nahi karenge
-                
+                if(board[i][j]=='.')continue;//if '.' is present ignore it because we will only store number inside char num 
+
+            
                 char num=board[i][j];
+                //since we have stored board[i][j] in the num varible  compare num with board ele so to avoid comparison with itslef we are marking that particular element as '.'
                 board[i][j]='.';
+
                 if(!isValid(board,i,j,num))return false;
+                //when comparison done with one cell for other cell we again remove '.' and make it original since loop goes to other cell so old should be restored this process is called backtrack
+
                 board[i][j]=num;
+
+
             }
         }
         return true;
