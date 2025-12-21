@@ -25,7 +25,8 @@
 //bottom up Tabulation
 class Solution{
     public int climbStairs(int n){
-        
+        //if(n<=1)return 1;
+        //In Climbing Stairs, since the staircase is assumed to have at least 1 step, there is no chance of index out of bounds. in constraints 1<=n<=45
         int dp[]=new int[n+1];
         dp[0]=1;
         dp[1]=1;
