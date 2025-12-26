@@ -5,7 +5,7 @@ public class Solution {
         int zeroes=0;
         while(r<n){
             if(nums[r]==0)zeroes++;
-            while(k<zeroes){
+            if(k<zeroes){
                 if(nums[l]==0){
                     zeroes--;
                 }
