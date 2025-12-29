@@ -6,8 +6,8 @@ class Solution {
         int maxLen=0;
         while(r<n){
             freq[s.charAt(r)-'A']++;
-            maxFreq=Math.max(maxFreq,freq[s.charAt(r)-'A']);
             int currentLen=r-l+1;
+            maxFreq=Math.max(maxFreq,freq[s.charAt(r)-'A']);
             if(currentLen-maxFreq>k){
                 freq[s.charAt(l)-'A']--;
                 l++;
