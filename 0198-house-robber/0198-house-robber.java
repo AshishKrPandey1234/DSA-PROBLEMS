@@ -1,16 +1,16 @@
 class Solution {
-    public int solve(int nums[],int dp[],int i){
-        if(i<0)return 0;
-        if(dp[i]!=-1)return dp[i];
-        int take=nums[i]+solve(nums,dp,i-2);
-        int nottake=solve(nums,dp,i-1);//here we are not taking so we will not add nums[i]that is current  value
-        int result=Math.max(take,nottake);
-        dp[i]=result;
-        return result;
+    private int solve(int nums[],int idx,int dp[]){
+        if(idx==0)return nums[0];
+        if(idx<0)return 0;
+        if(dp[idx]!=-1)return dp[idx];
+        int take=nums[idx]+solve(nums,idx-2,dp);
+        int notTake=solve(nums,idx-1,dp);
+        return dp[idx]=Math.max(take,notTake);
     }
     public int rob(int[] nums) {
-        int dp[]=new int[nums.length];
+        int n=nums.length;
+        int dp[]=new int[n];
         Arrays.fill(dp,-1);
-        return solve(nums,dp,nums.length-1);
+        return solve(nums,n-1,dp);
     }
 }
