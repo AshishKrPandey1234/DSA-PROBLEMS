@@ -1,17 +1,20 @@
 class Solution {
+    private int solve(int grid[][],int i,int j){
+        if(i==0 && j==0)return grid[0][0];
+        if(i<0 || j<0)return (int) 1e9;
+        // We use 1e9 instead of Integer.MAX_VALUE to avoid integer overflow.
+// Adding any positive value to Integer.MAX_VALUE causes overflow and wraps to Integer.MIN_VALUE (negative),
+// which can break min/max comparisons and produce incorrect results.
+
+
+        int up=grid[i][j]+solve(grid,i-1,j);
+        int left=grid[i][j]+solve(grid,i,j-1);
+
+        return Math.min(up,left);
+    }
     public int minPathSum(int[][] grid) {
-        int i=grid.length;
-        int j=grid[0].length;
-        int dp[][]=new int[i][j];
-        for(int row=0;row<i;row++){
-            for(int col=0;col<j;col++){
-                if(row==0 && col==0)dp[row][col]=grid[row][col];
-                else if(row==0)dp[row][col]=grid[row][col]+dp[row][col-1];
-                else if(col==0)dp[row][col]=grid[row][col]+dp[row-1][col];
-                else dp[row][col]=grid[row][col]+Math.min(dp[row-1][col],dp[row][col-1]);
-            }
-        }
-        return dp[i-1][j-1];
-        
+        int m=grid.length;
+        int n=grid[0].length;
+        return solve(grid,m-1,n-1);
     }
 }
