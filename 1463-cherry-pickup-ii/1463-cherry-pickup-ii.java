@@ -6,7 +6,7 @@ class Solution {
         if(j1<0||j1>=n||j2<0||j2>=n)return (int)(-1e9);
         //base case if we reach the last row
         if(i==m-1){
-            return (j1==j2)?grid[i][j1]:grid[i][j1]+grid[i][j2];
+            return dp[i][j1][j2]= (j1==j2)?grid[i][j1]:grid[i][j1]+grid[i][j2];
         }
         //check if already computed it than return it
         if(dp[i][j1][j2]!=-1)return dp[i][j1][j2];
