@@ -1,24 +1,23 @@
 class Solution {
     private boolean solve(int nums[],int i,int sum1,Boolean dp[][]){
-        int n=nums.length;
+        if(i<0)return false;
         if(sum1==0)return true;
-        if(i==n)return false;
         if(dp[i][sum1]!=null)return dp[i][sum1];
-        boolean not_pick=solve(nums,i+1,sum1,dp);
-        boolean pick=false;
-        if(nums[i]<=sum1){
-            pick=solve(nums,i+1,sum1-nums[i],dp);
+        boolean notTake=solve(nums,i-1,sum1,dp);
+        boolean take=false;
+        if(sum1>=nums[i]){
+            take=solve(nums,i-1,sum1-nums[i],dp);
         }
-        return dp[i][sum1]=pick||not_pick;
+        return dp[i][sum1]=take||notTake;
     }
     public boolean canPartition(int[] nums) {
-        int sum=0;
         int n=nums.length;
+        int sum=0;
         for(int i=0;i<n;i++){
             sum+=nums[i];
         }
+        Boolean dp[][]=new Boolean[n][sum/2+1];
         if(sum%2!=0)return false;
-        Boolean dp[][]=new Boolean[n][(sum/2)+1];
-        return solve(nums,0,sum/2,dp); 
+        return solve(nums,n-1,sum/2,dp);
     }
 }
