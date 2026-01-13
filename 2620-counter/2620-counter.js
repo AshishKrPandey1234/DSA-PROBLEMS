@@ -3,10 +3,11 @@
  * @return {Function} counter
  */
 var createCounter = function(n) {
+    n=n-1;
     
     return function() {
         //postfix increment syntax it will firstly return than increase
-        return n++;
+        return ++n;
     };
 };
 
