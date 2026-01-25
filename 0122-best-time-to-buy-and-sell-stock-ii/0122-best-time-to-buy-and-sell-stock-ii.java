@@ -1,22 +1,27 @@
 class Solution {
-    private int solve(int i,boolean flag,int prices[]){
+    private int solve(int i,int flag,int prices[],int dp[][]){
         if(i>=prices.length)return 0;
-        if(prices[0]==34)return 907;
-        if(prices[0]==397)return 1697678;
-        if(prices[0]==10000)return 4;
-        if(flag==true){
-            int canBuy=-prices[i]+solve(i+1,false,prices);
-            int skip=solve(i+1,true,prices);
-            return Math.max(canBuy,skip);
+        if(dp[i][flag]!=-1)return dp[i][flag];
+        int profit;
+        if(flag==1){
+            int canBuy=-prices[i]+solve(i+1,0,prices,dp);
+            int skip=solve(i+1,1,prices,dp);
+            profit=Math.max(canBuy,skip);
         }
         else{
-            int canSell=prices[i]+solve(i+1,true,prices);
-            int skip=solve(i+1,false,prices);
-            return Math.max(canSell,skip);
+            int canSell=prices[i]+solve(i+1,1,prices,dp);
+            int skip=solve(i+1,0,prices,dp);
+            profit=Math.max(canSell,skip);
         }
+        return dp[i][flag]=profit;
         
     }
     public int maxProfit(int[] prices) {
-        return solve(0,true,prices);//initially flag is true it means not purchased
+        int n=prices.length;
+        int dp[][]=new int[n][2];
+        for(int i=0;i<n;i++){
+            Arrays.fill(dp[i],-1);
+        }
+        return solve(0,1,prices,dp);//initially flag is 1 it means not purchased
     }
 }
