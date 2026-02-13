@@ -1,18 +1,17 @@
 class Solution {
-    private boolean dfs(List<List<Integer>>adj,int currNode,int destination,boolean vis[]){
-        vis[currNode]=true;
-        if(currNode==destination)return true;
-        for(int nbr:adj.get(currNode)){
+    private boolean dfs(int n,List<List<Integer>>adj,int curr,int destination,boolean vis[]){
+        vis[curr]=true;
+        if(curr==destination)return true;
+        for(int nbr:adj.get(curr)){
             if(!vis[nbr]){
-                boolean found=dfs(adj,nbr,destination,vis);
+                boolean found=dfs(n,adj,nbr,destination,vis);
                 if(found)return true;
             }
-            
         }
         return false;
     }
     public boolean validPath(int n, int[][] edges, int source, int destination) {
-        //step1 : create an adjacency list
+        //Step 1: Create adjacency list
         List<List<Integer>>adj=new ArrayList<>();
         for(int i=0;i<n;i++){
             adj.add(new ArrayList<>());
@@ -24,7 +23,7 @@ class Solution {
             adj.get(v).add(u);
         }
         boolean vis[]=new boolean[n+1];
-        boolean found=dfs(adj,source,destination,vis);
+        boolean found=dfs(n,adj,source,destination,vis);
         return found;
     }
 }
