@@ -1,34 +1,36 @@
 class Solution {
-    private void dfs(int node,List<List<Integer>>adjList,boolean vis[]){
-        vis[node]=true;
-        for(int nbr:adjList.get(node)){
-            if(!vis[nbr]){
-                dfs(nbr,adjList,vis);
-            }
-        }
-    }
     public int findCircleNum(int[][] isConnected) {
-        List<List<Integer>>adjList=new ArrayList<>();
         int V=isConnected.length;
+        List<List<Integer>>adj=new ArrayList<>();
         for(int i=0;i<V;i++){
-            adjList.add(new ArrayList<>());
+            adj.add(new ArrayList<>());
         }
-        for(int i=0;i<V;i++){
-            for(int j=0;j<V;j++){
-                if(isConnected[i][j]==1 && i!=j){
-                    adjList.get(i).add(j);
-                    adjList.get(j).add(i);
+        for(int u=0;u<V;u++){
+            for(int v=0;v<V;v++){
+                if(isConnected[u][v]==1 && u!=v){
+                    adj.get(u).add(v);
+                    adj.get(v).add(u);
                 }
             }
         }
         boolean vis[]=new boolean[V];
-        int count=0;
+        int cnt=0;
         for(int i=0;i<V;i++){
             if(!vis[i]){
-                count++;
-                dfs(i,adjList,vis);
+                int src=i;
+                dfs(adj,vis,src);
+                cnt++;
             }
         }
-        return count;
+        return cnt;
+        
+    }
+    private void dfs(List<List<Integer>>adj,boolean vis[],int currNode){
+        vis[currNode]=true;
+        for(int nbr:adj.get(currNode)){
+            if(!vis[nbr]){
+                dfs(adj,vis,nbr);;
+            }
+        }
     }
 }
