@@ -1,7 +1,8 @@
 class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         int V=numCourses;
-        int topo[]=new int[V];
+        //no need to even mak topo array only we have to detect cycle
+        //int topo[]=new int[V];
         //step 1:Create adjacency list
         List<List<Integer>>adj=new ArrayList<>();
         for(int i=0;i<V;i++){
@@ -33,7 +34,8 @@ class Solution {
         
         while(!q.isEmpty()){
             int node =q.poll();
-            topo[i++]=node;
+            i++;//no need to make topo as answere since it is  not rquired this way we can save some space but we have to increase i++
+            //topo[i++]=node;
             for(int nbr: adj.get(node)){
                 indegree[nbr]--;
                 //if indegree neighbour become 0 at that time add it to queue
