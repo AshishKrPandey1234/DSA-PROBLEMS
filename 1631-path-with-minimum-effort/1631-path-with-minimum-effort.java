@@ -19,6 +19,7 @@ class Solution {
         //since we are creating min heap
         PriorityQueue<Tuple>pq=new PriorityQueue<>((x,y)->Integer.compare(x.first,y.first));
         pq.add(new Tuple(0,0,0));//initial dist first=0 cell address(0,0)
+        dist[0][0]=0;
         int dr[]={-1,0,1,0};
         int dc[]={0,-1,0,1};
         while(!pq.isEmpty()){
