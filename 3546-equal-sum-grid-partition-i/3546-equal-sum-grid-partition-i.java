@@ -21,7 +21,8 @@ class Solution {
         long currColSum=0;
         for(int j=0;j<m;j++){
             for(int i=0;i<n;i++){
-                currColSum+=grid[i][j];
+                currColSum+=grid[i][j];//standard way to rerese t the address the row first than column
+                //For column-wise traversal, we fix the column index j and iterate over all rows i.
             }
             if(currColSum*2==totalSum)return true;
         }
