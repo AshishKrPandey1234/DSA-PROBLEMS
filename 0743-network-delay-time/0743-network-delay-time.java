@@ -1,41 +1,41 @@
 class Solution {
-    public int networkDelayTime(int[][] times, int n, int K) {
-        int[][] graph = new int[n][n];
-        for(int i = 0; i < n ; i++) Arrays.fill(graph[i], Integer.MAX_VALUE);
-        for( int[] rows : times) graph[rows[0] - 1][rows[1] - 1] =  rows[2];        
-        
-        int[] distance = new int[n];
-        Arrays.fill(distance, Integer.MAX_VALUE);
-        distance[K - 1] = 0;
-        
-        boolean[] visited = new boolean[n];
-        for(int i = 0; i < n ; i++){
-            int v = minIndex(distance, visited);
-            if(v == -1)continue;
-            visited[v] = true;
-            for(int j = 0; j < n; j++){
-                if(graph[v][j] != Integer.MAX_VALUE){
-                    int newDist = graph[v][j] + distance[v];
-                    if(newDist < distance[j]) distance[j] = newDist;
+    public int networkDelayTime(int[][] times, int n, int k) {
+        List<List<int[]>>adj=new ArrayList<>();
+        for(int i=0;i<=n;i++){
+            adj.add(new ArrayList<>());
+        }
+        for(int i=0;i<times.length;i++){
+            int u=times[i][0];
+            int v=times[i][1];
+            int cost=times[i][2];
+            adj.get(u).add(new int[]{v,cost});
+        }
+        int dist[]=new int[n+1];
+        Arrays.fill(dist,Integer.MAX_VALUE);
+        dist[k]=0;
+        PriorityQueue<int[]>pq=new PriorityQueue<>((x,y)->Integer.compare(x[0],y[0]));
+        pq.add(new int[]{0,k});//{cost,srcNode}
+        while(!pq.isEmpty()){
+            int curr[]=pq.poll();
+            int dis=curr[0];
+            int node=curr[1];
+
+            if(dis > dist[node]) continue;
+            for(int nbr[]:adj.get(node)){
+                int adjNode=nbr[0];
+                int edWt=nbr[1];
+                //relaxation: if previous node and coming wt is less than the code of adjNode than update it 
+                if(dist[node]+edWt<dist[adjNode]){
+                    dist[adjNode]=dist[node]+edWt;
+                    pq.add(new int[]{dist[adjNode],adjNode});
                 }
             }
         }
-        int result = 0;
-        for(int dist : distance){
-            if(dist == Integer.MAX_VALUE) return -1;
-            result = Math.max(result, dist);
+        int max=Integer.MIN_VALUE;
+        for(int i=1;i<=n;i++){
+            if(dist[i]==Integer.MAX_VALUE) return -1;
+            else max= Math.max(max,dist[i]);
         }
-        return result;
-    }
-	
-    private int minIndex(int[] distance, boolean[] visited){
-        int min = Integer.MAX_VALUE, minIndex = -1;
-        for(int i = 0; i < distance.length; i++){
-            if(!visited[i] && distance[i] < min){
-                min = distance[i];
-                minIndex = i;
-            }
-        }
-        return minIndex;
+        return max;
     }
 }
