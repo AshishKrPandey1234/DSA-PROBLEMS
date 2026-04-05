@@ -13,27 +13,34 @@
  *     }
  * }
  */
+// class Solution {
+//     public List<Integer> postorderTraversal(TreeNode root) {
+//         List<Integer>ans=new ArrayList<>();
+//         helper(root,ans);
+//         return ans;
+//     }
+//     private List<Integer>helper(TreeNode root,List<Integer>ans){
+//         if(root==null)return ans;
+//         //LC-RC-root
+//         helper(root.left,ans);
+//         helper(root.right,ans);
+//         ans.add(root.val);
+//         return ans;
+//     }
+// }
 class Solution {
     public List<Integer> postorderTraversal(TreeNode root) {
-        List<Integer>postOrder=new ArrayList<>();
-        if(root==null)return postOrder;
-        Stack<TreeNode>st1=new Stack<>();
-        Stack<TreeNode>st2=new Stack<>();
-        st1.push(root);
-        while(!st1.isEmpty()){
-            root=st1.pop();
-            st2.push(root);
-
-            if(root.left!=null){
-                st1.push(root.left);
-            }
-            if(root.right!=null){
-                st1.push(root.right);
-            }
+        List<Integer>ans=new ArrayList<>();
+        if(root==null)return ans;
+        Stack<TreeNode>st=new Stack<>();
+        st.push(root);
+        while(!st.isEmpty()){
+            TreeNode node=st.pop();
+            ans.add(node.val);
+            if(node.left!=null)st.push(node.left);
+            if(node.right!=null)st.push(node.right);
         }
-        while(!st2.isEmpty()){
-            postOrder.add(st2.pop().val);
-        }
-        return postOrder;
+        Collections.reverse(ans);
+        return ans;
     }
 }
