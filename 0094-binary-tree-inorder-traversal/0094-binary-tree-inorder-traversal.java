@@ -14,17 +14,22 @@
  * }
  */
 class Solution {
-    private void helper(TreeNode root,List<Integer>res){
-        if(root!=null){
-            helper(root.left,res);
-            res.add(root.val);
-            helper(root.right,res);
-        }
-    }
     public List<Integer> inorderTraversal(TreeNode root) {
-        List<Integer>res=new ArrayList<>();
-        helper(root,res);
-        return res;
+        List<Integer>ans=new ArrayList<>();
+        if(root==null)return ans;
+        Stack<TreeNode>st=new Stack<>();
+        TreeNode node=root;
+        while(!st.isEmpty() || node!=null){
+            if(node!=null){
+                st.push(node);
+                node=node.left;
+            }else{
+                node=st.pop();
+                ans.add(node.val);
+                node=node.right;
+            }
+        }
+        return ans;
         
     }
 }
