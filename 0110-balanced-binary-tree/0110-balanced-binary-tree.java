@@ -25,7 +25,8 @@ class Solution {
     private int getHt(TreeNode root){
         if(root==null)return 0;
         int leftHt=getHt(root.left);
-        int rtHt=getHt(root.right);
-        return Math.max(leftHt,rtHt)+1;
+        int rightHt=getHt(root.right);
+        return 1+Math.max(leftHt,rightHt);
+
     }
 }
