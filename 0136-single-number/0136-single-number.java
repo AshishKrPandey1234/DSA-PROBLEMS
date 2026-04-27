@@ -1,11 +1,13 @@
 class Solution {
     public int singleNumber(int[] nums) {
-        //bitwise xor operator when we do xor of two same number than we got 0 
-        //if 0 xor unique=uniue is the ans
-        int res=0;
+        Map<Integer,Integer>mpp=new HashMap<>();
         for(int num:nums){
-            res=res^num;
+            mpp.put(num,mpp.getOrDefault(num,0)+1);
         }
-        return res;
+        for(int num:nums){
+            if(mpp.get(num)==1)
+            return num;
+        }
+        return -1;
     }
 }
