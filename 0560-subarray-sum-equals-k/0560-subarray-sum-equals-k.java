@@ -2,12 +2,16 @@ class Solution {
     public int subarraySum(int[] nums, int k) {
         int count=0;
         int n=nums.length;
-        for(int i=0;i<n;i++){
-            int sum=0;
-            for(int j=i;j<n;j++){
-                sum+=nums[j];
-                if(sum==k)count++;
+        int prefix=0;
+        Map<Integer,Integer>mpp=new HashMap<>();
+        mpp.put(0,1);
+        for(int num:nums){
+            prefix+=num;
+        
+            if(mpp.containsKey(k-num)){
+                count+=mpp.get(k-num);
             }
+            mpp.put(prefix,mpp.getOrDefault(prefix,0)+1);
         }
         return count;
         
