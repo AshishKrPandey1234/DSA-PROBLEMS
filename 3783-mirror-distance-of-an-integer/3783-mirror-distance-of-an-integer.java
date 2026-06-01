@@ -8,7 +8,7 @@ class Solution {
             num/=10;
             
         }
-        System.out.println(rev);
+        //System.out.println(rev);
         return Math.abs(rev-n);
         
     }
