@@ -24,12 +24,10 @@ class Solution {
             TreeNode next=list.get(i+1);
             curr.left=null;
             curr.right=next;
+            curr=next;
         }
-        //for last node both left and right should be null
-        TreeNode last=list.get(size-1);
-        last.left=null;
-        last.right=null;
-
+        
+        
     }
     public void preorder(TreeNode root){
         if(root==null)return;
