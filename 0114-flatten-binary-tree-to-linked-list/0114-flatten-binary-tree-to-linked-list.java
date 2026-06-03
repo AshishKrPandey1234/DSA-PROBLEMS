@@ -24,7 +24,7 @@ class Solution {
             TreeNode next=list.get(i+1);
             curr.left=null;
             curr.right=next;
-            curr=next;
+            //curr=next;
         }
         
         
