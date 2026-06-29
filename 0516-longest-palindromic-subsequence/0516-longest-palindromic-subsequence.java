@@ -29,14 +29,7 @@ class Solution {
     public int longestPalindromeSubseq(String s) {
         String r=new StringBuilder(s).reverse().toString();
         return solve(s,r);
-    
-        // for(int i=0;i<text2.length();i++){
-        //     for(int j=0;j<text1.length();j++){
-        //         if(text1.charAt(j)==text2.charAt(i)) 
-        //         c++;
-        //     }
-        // }
-        // return c;
+
         
     }
 }
