@@ -7,7 +7,7 @@ class Solution {
         HashMap<Integer,Integer>mpp=new HashMap<>();
         int r=1;
         for(int i=0;i<n;i++){
-            if(i>0 && temp[i]>temp[i-1]){
+            if(i>0 && temp[i]!=temp[i-1]){
                 r++;
             }
             mpp.put(temp[i],r);
