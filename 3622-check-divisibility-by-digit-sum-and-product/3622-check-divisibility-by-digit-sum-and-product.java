@@ -9,8 +9,8 @@ class Solution {
             prod*=d;
             num/=10;
         }
-        System.out.println(sum);
-        System.out.println(prod);
+        //System.out.println(sum);
+        //System.out.println(prod);
         if(n%(sum+prod)==0){
             return true;
         }
