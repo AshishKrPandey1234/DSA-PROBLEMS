@@ -16,13 +16,11 @@ class Solution {
             char ch=t.charAt(i);
             if(!mpp.containsKey(ch)) return false;
             int count=mpp.get(ch);
-            if(count==1){
-                mpp.remove(ch);
-            }else{
-                mpp.put(ch,count-1);
+            if(count==1) mpp.remove(ch);
+            else{
+                mpp.put(ch,mpp.get(ch)-1);
             }
-            
         }
-        return mpp.isEmpty();   
+        return mpp.isEmpty();
     }
 }
