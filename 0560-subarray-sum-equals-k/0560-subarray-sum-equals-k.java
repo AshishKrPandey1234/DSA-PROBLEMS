@@ -6,7 +6,7 @@ class Solution {
             int sum=0;
             for(int j=i;j<n;j++){
                 sum+=nums[j];
-                //if(sum>k)continue;
+                if(sum>k)continue;
                 if(sum==k)count++;
             }
         }
