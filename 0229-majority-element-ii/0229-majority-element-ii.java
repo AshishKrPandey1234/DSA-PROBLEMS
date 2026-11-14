@@ -5,9 +5,9 @@ class Solution {
         for(int num:nums){
             mpp.put(num,mpp.getOrDefault(num,0)+1);
         }
-        for(Map.Entry<Integer,Integer>entry:mpp.entrySet()){
-            if(entry.getValue()>nums.length/3){
-                ans.add(entry.getKey());
+        for(int key:mpp.keySet()){
+            if(mpp.get(key)>nums.length/3){
+                ans.add(key);
             }
         }
         return ans;
