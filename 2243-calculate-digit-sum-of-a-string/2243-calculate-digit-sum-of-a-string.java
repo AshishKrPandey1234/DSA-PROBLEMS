@@ -1,8 +1,8 @@
 class Solution {
     public String digitSum(String s, int k) {
         while(s.length()>k){
-            StringBuilder sb=new StringBuilder();
             int n=s.length();
+            StringBuilder sb=new StringBuilder();
             for(int i=0;i<n;i+=k){
                 int val=0;
                 for(int j=i;j<Math.min(i+k,n);j++){
