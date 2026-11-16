@@ -1,10 +1,20 @@
 class Solution {
     public void sortColors(int[] nums) {
         int left=0, curr=0, right=nums.length-1;
-        //dutch flag algorithm in which we are dividing the array in three part assuming in left their should be 0 in mid 1 and in right 2
-        // we will traverse current if we get 0 immediately swap with left as left part got 0 left is happily moving its pointer left++ and their is not any chance that left will ever get 1 because curr and left is started iterating from same location curr iterated first so if current would have got it would have swap with right 
-        // now if curr got right it will swap with right and right-- but curr will remain same because what right had swap we dont know it can be 0 or 1 
-        //now if curr=1 then directly do curr++
+        // Dutch Flag Algorithm: Partition the array into three regions—
+// 0s on the left, 1s in the middle, and 2s on the right using three pointers.
+
+// Case 0: If the current element is 0, swap it with the left pointer, then increment both left++ and curr++.
+// Reason: 'left' never points to a 2 (since all 2s are handled by the right boundary). 
+// When we swap arr[curr] (0) with arr[left], the value landing at curr is guaranteed to be 1 
+// (either because left == curr, or because left points to a 1 that was already scanned). 
+// Thus, curr has already evaluated this incoming 1 and can safely move forward.
+
+// Case 2: If the current element is 2, swap it with the right pointer and decrement right--.
+// Keep curr unchanged because the incoming element swapped from the right is completely unexamined 
+// (it could be a 0, 1, or 2) and must be evaluated in the next iteration.
+
+// Case 1: If the current element is 1, simply increment curr++.
         while(curr<=right){
             if(nums[curr]==0){
                 int temp=nums[curr];
